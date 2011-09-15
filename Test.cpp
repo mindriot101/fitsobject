@@ -20,6 +20,15 @@ struct DefaultFixture
     Fits *f;
 };
 
+struct TableFixture : public DefaultFixture
+{
+    TableFixture() : 
+        DefaultFixture()
+    {
+        f->moveHDU(2);
+    }
+};
+
 /* Check for a bad filename */
 TEST(BadFilename)
 {
@@ -43,10 +52,20 @@ TEST_FIXTURE(DefaultFixture, BadHDUName)
     CHECK_THROW(f->moveHDU("BADHDUNAME"), runtime_error);
 }
 
-TEST_FIXTURE(DefaultFixture, HDUName)
+TEST_FIXTURE(TableFixture, HDUName)
 {
-    f->moveHDU(2);
     CHECK_EQUAL("TABLE", f->hduname());
+}
+
+TEST_FIXTURE(DefaultFixture, BadHDURows)
+{
+    f->moveHDU(1);
+    CHECK_THROW(f->nrows(), runtime_error);
+}
+
+TEST_FIXTURE(TableFixture, NRowsTest)
+{
+    CHECK_EQUAL(3, f->nrows());
 }
 
 int main(int argc, const char *argv[])
