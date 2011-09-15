@@ -48,6 +48,15 @@ void Fits::moveHDU(int hdunum)
 
 long Fits::nrows()
 {
+    /* Ensure the current hdu is a (binary) table */
+    int hdutype;
+    fits_get_hdutype(this->m_fptr, &hdutype, &this->m_status);
+
+    if ((hdutype != ASCII_TBL) && (hdutype != BINARY_TBL))
+    {
+        throw runtime_error("Non-table hdu found");
+    }
+
 
 }
 
