@@ -38,6 +38,11 @@ TEST_FIXTURE(DefaultFixture, PastFileMoveCheck)
 
 }
 
+TEST_FIXTURE(DefaultFixture, BadHDUName)
+{
+    CHECK_THROW(f->moveHDU("BADHDUNAME"), runtime_error);
+}
+
 int main(int argc, const char *argv[])
 {
     return UnitTest::RunAllTests();
