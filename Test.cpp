@@ -18,6 +18,11 @@ struct DefaultFixture
     Fits *f;
 };
 
+/* Check for a bad filename */
+TEST(BadFilename)
+{
+}
+
 int main(int argc, const char *argv[])
 {
     
