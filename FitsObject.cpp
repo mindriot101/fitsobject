@@ -62,11 +62,14 @@ void Fits::checkForTable()
 
 int Fits::columnNumber(const std::string &colname)
 {
+    this->checkForTable();
 }
 
 long Fits::nrows()
 {
     // Ensure the current hdu is a (binary) table 
+    this->checkForTable();
+
     int hdutype;
     fits_get_hdu_type(this->m_fptr, &hdutype, &this->m_status);
     this->check();
