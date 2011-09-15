@@ -27,6 +27,7 @@ class Fits
     fitsfile *m_fptr;
     int m_status;
     std::string m_filename;
+    void checkForTable();
 
 
     /* Default constructor - does nothing */

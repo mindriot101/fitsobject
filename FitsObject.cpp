@@ -46,6 +46,20 @@ void Fits::moveHDU(int hdunum)
     this->check();
 }
 
+void Fits::checkForTable()
+{
+    /* Checks for a table extension */
+    int hdutype;
+    fits_get_hdu_type(this->m_fptr, &hdutype, &this->m_status);
+    this->check();
+
+    if ((hdutype != ASCII_TBL) && (hdutype != BINARY_TBL))
+    {
+        throw runtime_error("Non-table hdu found");
+    }
+}
+
+
 int Fits::columnNumber(const std::string &colname)
 {
 }
