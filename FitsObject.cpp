@@ -46,6 +46,10 @@ void Fits::moveHDU(int hdunum)
     this->check();
 }
 
+int Fits::columnNumber(const std::string &colname)
+{
+}
+
 long Fits::nrows()
 {
     // Ensure the current hdu is a (binary) table 

@@ -20,6 +20,7 @@ class Fits
     const std::string hduname();
 
     long nrows();
+    int columnNumber(const std::string &colname);
 
 
     protected:
