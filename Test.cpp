@@ -43,6 +43,12 @@ TEST_FIXTURE(DefaultFixture, BadHDUName)
     CHECK_THROW(f->moveHDU("BADHDUNAME"), runtime_error);
 }
 
+TEST_FIXTURE(DefaultFixture, HDUName)
+{
+    f->moveHDU(2);
+    CHECK_EQUAL("TABLE", f->hduname());
+}
+
 int main(int argc, const char *argv[])
 {
     return UnitTest::RunAllTests();
