@@ -68,6 +68,12 @@ TEST_FIXTURE(TableFixture, NRowsTest)
     CHECK_EQUAL(3, f->nrows());
 }
 
+TEST_FIXTURE(TableFixture, ColnumTest)
+{
+    CHECK_EQUAL(1, f->columnNumber("target"));
+    CHECK_EQUAL(2, f->columnNumber("V_mag"));
+}
+
 int main(int argc, const char *argv[])
 {
     return UnitTest::RunAllTests();
