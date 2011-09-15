@@ -24,6 +24,11 @@ void Fits::check()
     {
         char buf[FLEN_STATUS];
         fits_get_errstatus(this->m_status, buf);
+
+        /* Have to set the status back to 0 otherwise
+         * when the destructor is called and the file is closed
+         * then another exception will be thrown */
+        this->m_status = 0;
         throw runtime_error(buf);
     }
 }
