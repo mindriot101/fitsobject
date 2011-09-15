@@ -63,6 +63,13 @@ void Fits::checkForTable()
 int Fits::columnNumber(const std::string &colname)
 {
     this->checkForTable();
+
+    int colnum;
+    fits_get_colnum(this->m_fptr, CASEINSEN, const_cast<char*>(colname.c_str()), &colnum, &this->m_status);
+    this->check();
+
+    return colnum;
+
 }
 
 long Fits::nrows()
