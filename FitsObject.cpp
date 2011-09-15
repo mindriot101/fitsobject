@@ -46,6 +46,11 @@ void Fits::moveHDU(int hdunum)
     this->check();
 }
 
+long Fits::nrows()
+{
+
+}
+
 fitsfile **Fits::fptr() { return &this->m_fptr; }
 int &Fits::status() { return this->m_status; }
 

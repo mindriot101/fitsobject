@@ -19,6 +19,8 @@ class Fits
     static void check(int status);
     const std::string hduname();
 
+    long nrows();
+
 
     protected:
     fitsfile *m_fptr;
