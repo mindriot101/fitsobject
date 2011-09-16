@@ -20,18 +20,29 @@ Fits::~Fits()
 
 void Fits::check()
 {
+    char errbuf[FLEN_ERRMSG];
+    while (fits_read_errmsg(errbuf))
+    {
+        fprintf(stderr, "Fits error (on stack): %s\n", errbuf);
+    }
+
     if (this->m_status)
     {
+
         char buf[FLEN_STATUS];
+
+
         fits_get_errstatus(this->m_status, buf);
 
-        /* Have to set the status back to 0 otherwise
-         * when the destructor is called and the file is closed
-         * then another exception will be thrown */
+         //Have to set the status back to 0 otherwise
+         //when the destructor is called and the file is closed
+         //then another exception will be thrown 
         this->m_status = 0;
-        /* Ensure the marks are not visible */
+        // Ensure the marks are not visible 
         fits_clear_errmsg();
         throw runtime_error(buf);
+
+
     }
 }
 
