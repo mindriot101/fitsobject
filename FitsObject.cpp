@@ -29,6 +29,8 @@ void Fits::check()
          * when the destructor is called and the file is closed
          * then another exception will be thrown */
         this->m_status = 0;
+        /* Ensure the marks are not visible */
+        fits_clear_errmsg();
         throw runtime_error(buf);
     }
 }
