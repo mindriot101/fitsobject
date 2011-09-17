@@ -20,12 +20,6 @@ Fits::~Fits()
 
 void Fits::check()
 {
-    char errbuf[FLEN_ERRMSG];
-    while (fits_read_errmsg(errbuf))
-    {
-        fprintf(stderr, "Fits error (on stack): %s\n", errbuf);
-    }
-
     if (this->status())
     {
 
