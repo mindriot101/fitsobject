@@ -2,9 +2,11 @@
 
 #define FITSOBJECT_H
 
+#include <vector>
 #include <string>
 #include <exception>
 #include <fitsio.h>
+
 
 class Fits
 {
@@ -21,6 +23,7 @@ class Fits
 
     long nrows();
     int columnNumber(const std::string &colname);
+    std::vector<std::string> stringColumn(const std::string &columnname);
 
 
     protected:
