@@ -159,5 +159,7 @@ vector<string> Fits::stringColumn(const string &columnname)
 
     }
 
+    this->check();
+
     return Objects;
 }
