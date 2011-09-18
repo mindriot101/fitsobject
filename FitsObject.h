@@ -25,6 +25,9 @@ class Fits
     int columnNumber(const std::string &colname);
     std::vector<std::string> stringColumn(const std::string &columnname);
 
+    template <typename T>
+        std::vector<T> columnData(const std::string &columnname);
+
 
     protected:
     fitsfile *m_fptr;
