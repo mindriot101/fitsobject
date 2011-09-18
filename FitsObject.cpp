@@ -137,32 +137,32 @@ NewFits::NewFits(const string &filename)
     this->check();
 }
 
-vector<string> Fits::stringColumn(const string &columnname)
-{
-    int colno = this->columnNumber(columnname);
-    long nrows = this->nrows();
+//vector<string> Fits::stringColumn(const string &columnname)
+//{
+    //int colno = this->columnNumber(columnname);
+    //long nrows = this->nrows();
 
-    int dispwidth;
-    fits_get_col_display_width(*this->fptr(), colno, &dispwidth, &this->status());
-
-
-
-    vector<string> Objects;
-    for (int i=0; i<nrows; ++i)
-    {
-        char Name[dispwidth+1], *nptr=(char*)Name;
-        fits_read_col_str(*this->fptr(), colno, i+1, 1, 1, "", &nptr, NULL, &this->status());
-        this->check();
-
-        Objects.push_back(Name);
+    //int dispwidth;
+    //fits_get_col_display_width(*this->fptr(), colno, &dispwidth, &this->status());
 
 
-    }
 
-    this->check();
+    //vector<string> Objects;
+    //for (int i=0; i<nrows; ++i)
+    //{
+        //char Name[dispwidth+1], *nptr=(char*)Name;
+        //fits_read_col_str(*this->fptr(), colno, i+1, 1, 1, "", &nptr, NULL, &this->status());
+        //this->check();
 
-    return Objects;
-}
+        //Objects.push_back(Name);
+
+
+    //}
+
+    //this->check();
+
+    //return Objects;
+//}
 
 template<>
 vector<double> Fits::columnData(const string &columnname)
