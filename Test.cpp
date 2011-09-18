@@ -77,14 +77,17 @@ TEST_FIXTURE(TableFixture, ColnumTest)
 TEST_FIXTURE(TableFixture, StringColumnRetrievalTest)
 {
     vector<string> data = f->columnData<string>("target");
-    string Target("NGC1001");
-    CHECK_EQUAL(Target, data[0]);
+    CHECK_EQUAL("NGC1001", data[0]);
+    CHECK_EQUAL("NGC1002", data[1]);
+    CHECK_EQUAL("NGC1003", data[2]);
 }
 
 TEST_FIXTURE(TableFixture, DoubleColumnRetrievalTest)
 {
     vector<double> data = f->columnData<double>("V_mag");
     CHECK_CLOSE(11.1, data[0], 0.05);
+    CHECK_CLOSE(12.3, data[1], 0.05);
+    CHECK_CLOSE(15.2, data[2], 0.05);
 }
 
 int main(int argc, const char *argv[])
