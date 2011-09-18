@@ -163,3 +163,83 @@ vector<string> Fits::stringColumn(const string &columnname)
 
     return Objects;
 }
+
+template<>
+vector<double> Fits::columnData(const string &columnname)
+{
+    int colno = this->columnNumber(columnname);
+    long nrows = this->nrows();
+
+    std::vector<double> data(nrows);
+    fits_read_col(*this->fptr(), TDOUBLE, colno, 1, 1, nrows, NULL, &data[0], NULL, &this->status());
+    this->check();
+
+    return data;
+} 
+
+template<>
+vector<long> Fits::columnData(const string &columnname)
+{
+    int colno = this->columnNumber(columnname);
+    long nrows = this->nrows();
+
+    std::vector<long> data(nrows);
+    fits_read_col(*this->fptr(), TINT, colno, 1, 1, nrows, NULL, &data[0], NULL, &this->status());
+    this->check();
+
+    return data;
+} 
+
+template<>
+vector<int> Fits::columnData(const string &columnname)
+{
+    int colno = this->columnNumber(columnname);
+    long nrows = this->nrows();
+
+    std::vector<int> data(nrows);
+    fits_read_col(*this->fptr(), TINT, colno, 1, 1, nrows, NULL, &data[0], NULL, &this->status());
+    this->check();
+
+    return data;
+} 
+
+template<>
+vector<float> Fits::columnData(const string &columnname)
+{
+    int colno = this->columnNumber(columnname);
+    long nrows = this->nrows();
+
+    std::vector<float> data(nrows);
+    fits_read_col(*this->fptr(), TFLOAT, colno, 1, 1, nrows, NULL, &data[0], NULL, &this->status());
+    this->check();
+
+    return data;
+} 
+
+template<>
+vector<string> Fits::columnData(const string &columnname)
+{
+    int colno = this->columnNumber(columnname);
+    long nrows = this->nrows();
+
+    int dispwidth;
+    fits_get_col_display_width(*this->fptr(), colno, &dispwidth, &this->status());
+
+
+
+    vector<string> Objects;
+    for (int i=0; i<nrows; ++i)
+    {
+        char Name[dispwidth+1], *nptr=(char*)Name;
+        fits_read_col_str(*this->fptr(), colno, i+1, 1, 1, "", &nptr, NULL, &this->status());
+        this->check();
+
+        Objects.push_back(Name);
+
+
+    }
+
+    this->check();
+
+    return Objects;
+} 
