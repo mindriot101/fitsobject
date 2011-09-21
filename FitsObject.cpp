@@ -132,9 +132,9 @@ NewFits::NewFits(const string &filename)
     this->check();
 
     /* Ensure the basic keywords are there */
-    long naxes[] = {0, 0};
-    fits_create_img(*this->fptr(), BYTE_IMG, 0, naxes, &this->status());
-    this->check();
+    //long naxes[] = {0, 0};
+    //fits_create_img(*this->fptr(), BYTE_IMG, 0, naxes, &this->status());
+    //this->check();
 }
 
 
