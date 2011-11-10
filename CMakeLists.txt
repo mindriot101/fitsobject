@@ -6,7 +6,6 @@ find_package(UnitTest++ REQUIRED)
 
 set(SRCS 
     ${CMAKE_SOURCE_DIR}/FitsObject.cpp
-    ${CMAKE_SOURCE_DIR}/Test.cpp
     )
 
 set(HDRS
@@ -18,10 +17,18 @@ include_directories(
     ${FITSIO_INCLUDE_DIR}
     )
 
-add_executable(FitsObjectTest ${SRCS} ${HDRS})
+add_library(FitsObject ${SRCS} ${HDRS})
 
 target_link_libraries(
-    FitsObjectTest
+    FitsObject
     ${FITSIO_LIBRARIES}
+    )
+
+set(RESULTLIB ${CMAKE_BINARY_DIR}/${CMAKE_STATIC_LIBRARY_PREFIX}FitsObject${CMAKE_STATIC_LIBRARY_SUFFIX})
+
+add_executable(FitsObjectTest ${CMAKE_SOURCE_DIR}/Test.cpp)
+target_link_libraries(FitsObjectTest
+    ${RESULTLIB}
     ${UNITTESTPP_LIBRARIES}
+    ${FITSIO_LIBRARIES}
     )
