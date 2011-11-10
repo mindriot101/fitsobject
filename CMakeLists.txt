@@ -8,7 +8,7 @@ find_package(UnitTest++ REQUIRED)
 
 set(TESTFITSFILE "${PROJECT_SOURCE_DIR}/test.fits")
 
-option(ENABLE_SHARED "Compile a shared library (not recommened" OFF)
+#option(ENABLE_SHARED "Compile a shared library (not recommened" OFF)
 
 set(SRCS 
     ${${TARGET}_SOURCE_DIR}/FitsObject.cpp
