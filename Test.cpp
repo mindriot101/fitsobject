@@ -9,7 +9,7 @@ struct DefaultFixture
 {
     DefaultFixture()
     {
-        f = new Fits("../test.fits");
+        f = new Fits("test.fits");
     }
 
     ~DefaultFixture()
