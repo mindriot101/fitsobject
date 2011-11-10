@@ -2,7 +2,6 @@ cmake_minimum_required(VERSION 2.6)
 
 set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake ${CMAKE_MODULE_PATH})
 set(TARGET FitsObject)
-set(FITSOBJECTTARGET ${TARGET} PARENT_SCOPE)
 project(${TARGET})
 find_package(fitsio REQUIRED)
 find_package(UnitTest++ REQUIRED)
@@ -49,3 +48,7 @@ target_link_libraries(
 
 add_dependencies(FitsObjectTest ${TARGET})
 
+# Set some nice variables for the parent scope
+set(FITSOBJECT_LIBRARIES ${RESULTLIB} PARENT_SCOPE)
+set(FITSOBJECT_INCLUDE_DIR} ${PROJECT_SOURCE_DIR} PARENT_SCOPE)
+set(FITSOBJECTTARGET ${TARGET} PARENT_SCOPE)
