@@ -1,15 +1,22 @@
 cmake_minimum_required(VERSION 2.6)
 
 set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake ${CMAKE_MODULE_PATH})
+set(TARGET FitsObject)
+set(FITSOBJECTTARGET ${TARGET} PARENT_SCOPE)
+project(${TARGET})
 find_package(fitsio REQUIRED)
 find_package(UnitTest++ REQUIRED)
 
+set(TESTFITSFILE "${PROJECT_SOURCE_DIR}/test.fits")
+
+option(ENABLE_SHARED "Compile a shared library (not recommened" OFF)
+
 set(SRCS 
-    ${CMAKE_SOURCE_DIR}/FitsObject.cpp
+    ${${TARGET}_SOURCE_DIR}/FitsObject.cpp
     )
 
 set(HDRS
-    ${CMAKE_SOURCE_DIR}/FitsObject.h
+    ${${TARGET}_SOURCE_DIR}/FitsObject.h
     )
 
 include_directories(
@@ -17,18 +24,28 @@ include_directories(
     ${FITSIO_INCLUDE_DIR}
     )
 
-add_library(FitsObject ${SRCS} ${HDRS})
+if (ENABLE_SHARED)
+    add_library(${TARGET} SHARED ${SRCS} ${HDRS})
+else(ENABLE_SHARED)
+    add_library(${TARGET} ${SRCS} ${HDRS})
+endif(ENABLE_SHARED)
 
 target_link_libraries(
-    FitsObject
+    ${TARGET}
     ${FITSIO_LIBRARIES}
     )
 
-set(RESULTLIB ${CMAKE_BINARY_DIR}/${CMAKE_STATIC_LIBRARY_PREFIX}FitsObject${CMAKE_STATIC_LIBRARY_SUFFIX})
 
-add_executable(FitsObjectTest ${CMAKE_SOURCE_DIR}/Test.cpp)
-target_link_libraries(FitsObjectTest
+# Get the libraries location
+get_target_property(RESULTLIB ${TARGET} LOCATION)
+
+add_executable(FitsObjectTest ${${TARGET}_SOURCE_DIR}/Test.cpp)
+target_link_libraries(
+    FitsObjectTest
     ${RESULTLIB}
     ${UNITTESTPP_LIBRARIES}
     ${FITSIO_LIBRARIES}
     )
+
+add_dependencies(FitsObjectTest ${TARGET})
+
