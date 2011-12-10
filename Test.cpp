@@ -5,6 +5,7 @@
 
 using namespace std;
 
+
 struct DefaultFixture
 {
     DefaultFixture()
@@ -18,6 +19,21 @@ struct DefaultFixture
     }
 
     Fits *f;
+};
+
+struct ReadOnlyFixture
+{
+    ReadOnlyFixture()
+    {
+        f = new ReadOnlyFits("test.fits");
+    }
+
+    ~ReadOnlyFixture()
+    {
+        delete f;
+    }
+
+    ReadOnlyFits *f;
 };
 
 struct TableFixture : public DefaultFixture
@@ -39,6 +55,10 @@ TEST_FIXTURE(DefaultFixture, BadMoveCheck)
 {
     CHECK_THROW(f->moveHDU(-100), runtime_error);
 
+}
+
+TEST_FIXTURE(ReadOnlyFixture, ReadOnlyTest)
+{
 }
 
 TEST_FIXTURE(DefaultFixture, PastFileMoveCheck)
