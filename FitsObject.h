@@ -46,6 +46,12 @@ class NewFits : public Fits
     NewFits(const std::string &filename);
 };
 
+class ReadOnlyFits : public Fits
+{
+    public:
+        ReadOnlyFits(const std::string &filename);
+};
+
 class FitsException : public std::exception
 {
     char msg[FLEN_STATUS];

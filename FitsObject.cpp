@@ -10,6 +10,14 @@ using namespace std;
     this->check();
 }
 
+ReadOnlyFits::ReadOnlyFits(const string &filename)
+{
+    this->m_status = 0;
+    this->m_filename = filename;
+    fits_open_file(&*this->fptr(), this->m_filename.c_str(), READONLY, &this->status());
+    this->check();
+}
+
 Fits::Fits() {}
 
 Fits::~Fits()
