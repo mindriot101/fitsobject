@@ -8,7 +8,7 @@ find_package(UnitTest++ REQUIRED)
 
 set(TESTFITSFILE "${PROJECT_SOURCE_DIR}/test.fits")
 
-#option(ENABLE_SHARED "Compile a shared library (not recommened" OFF)
+option(ENABLE_SHARED "Compile a shared library (not recommened" OFF)
 
 set(SRCS 
     ${${TARGET}_SOURCE_DIR}/FitsObject.cpp
@@ -20,6 +20,8 @@ set(HDRS
 
 include_directories(
     ${UNITTESTPP_INCLUDE_DIR}
+    /home/astro/phrfbf/build/gcc/include/c++/4.6.2
+    /home/astro/phrfbf/build/gcc/include/c++/4.6.2/x86_64-unknown-linux-gnu
     ${FITSIO_INCLUDE_DIR}
     )
 
