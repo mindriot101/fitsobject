@@ -217,7 +217,7 @@ vector<string> Fits::columnData(const string &columnname)
         fits_read_col_str(*this->fptr(), colno, i+1, 1, 1, const_cast<char*>(nullstr.c_str()), &nptr, NULL, &this->status());
         this->check();
 
-        Objects.push_back(Name);
+        Objects.push_back(string(Name));
 
 
     }
